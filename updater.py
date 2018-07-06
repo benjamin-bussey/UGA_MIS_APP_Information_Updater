@@ -21,7 +21,6 @@ for entry in faculty:
     information = entry.find('div', {'class': 'media-body'})
 
     #Name section
-    name = ''
     nameParts = information.find('a', {'class': 'fn'}).find_all('span')
     for namePart in nameParts:
         name += namePart.text + ' '
@@ -30,6 +29,8 @@ for entry in faculty:
     name = str.rstrip(name)
     name = name.replace('  ', ' ')
     print(name)
+
+    #picture section
 
     #Title section
     title = information.find('ul', {'class': 'title'}).text
@@ -40,7 +41,6 @@ for entry in faculty:
     print(title)
 
     #Office section
-    office = ''
     try:
         office = information.find('div', {'class': 'extended-address'}).text
 
@@ -60,13 +60,13 @@ for entry in faculty:
     print(email)
 
     #Adding each entry (type dictionary) into the data list
-    facultyData.append(dict([('name', name), ('title', title), ('office', office), ('email', email)]))
+    facultyData.append(dict([('name', name), ('picutre', picture), ('title', title), ('office', office), ('email', email)]))
 
     #Printing visual divider
     print('-------------------------------------------------------------')
 
 #Writing json to file
-with open('faculty_information.txt', 'w') as outfile:
+with open('faculty_information.json', 'w') as outfile:
     json.dump(facultyData, outfile)
 
 
@@ -138,5 +138,5 @@ courseData.append(dict([('grad', gradData)]))
 
 
 #Writing json to file
-with open('course_information.txt', 'w') as outfile:
+with open('course_information.json', 'w') as outfile:
     json.dump(courseData, outfile)
