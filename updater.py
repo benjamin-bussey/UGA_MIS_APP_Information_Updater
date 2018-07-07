@@ -21,6 +21,7 @@ for entry in faculty:
     picture = ''
     try:
         picture = entry.find('img', {'class': 'photo'})['src']
+        picture = picture[2:]
     except TypeError:
         picture = ''
 
@@ -45,8 +46,6 @@ for entry in faculty:
     name = str.rstrip(name)
     name = name.replace('  ', ' ')
     print(name)
-
-    # TODO picture section
 
     # Title section
     title = information.find('ul', {'class': 'title'}).text
